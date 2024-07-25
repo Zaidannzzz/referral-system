@@ -9,9 +9,9 @@ import { Purchase } from './purchases/purchases.entity';
 import { join } from 'path';
 import { existsSync, mkdirSync, copyFileSync } from 'fs';
 
-const tmpDir = '/tmp';
+const tmpDir = '/tmp/db';
 const dbFile = join(__dirname, 'src/db/database.sqlite');
-const tmpDbFile = join(tmpDir, 'src/db/database.sqlite');
+const tmpDbFile = join(tmpDir, 'database.sqlite');
 
 if (!existsSync(tmpDir)) {
   mkdirSync(tmpDir);
