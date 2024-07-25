@@ -1,4 +1,4 @@
-import { Purchase } from 'src/purchases/purchases.entity';
+import { Purchase } from '../purchases/purchases.entity';
 import {
   Entity,
   Column,
