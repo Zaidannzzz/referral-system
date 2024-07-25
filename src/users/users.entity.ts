@@ -1,3 +1,4 @@
+import { Purchase } from 'src/purchases/purchases.entity';
 import {
   Entity,
   Column,
@@ -20,7 +21,7 @@ export class User {
   @Column()
   referralCode: string;
 
-  @ManyToOne(() => User, (user) => user.referrals)
+  @ManyToOne(() => User, (user) => user.referrals, { nullable: true })
   referredBy: User;
 
   @OneToMany(() => User, (user) => user.referredBy)
@@ -28,4 +29,7 @@ export class User {
 
   @Column({ default: 0 })
   earnings: number;
+
+  @OneToMany(() => Purchase, (purchase) => purchase.user)
+  purchases: Purchase[];
 }

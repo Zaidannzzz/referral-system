@@ -23,6 +23,7 @@ export class UsersService {
     if (referralCode) {
       const referrer = await this.usersRepository.findOne({
         where: { referralCode },
+        relations: ['referrals'],
       });
       if (!referrer) {
         throw new NotFoundException('Referral code not found');
@@ -37,16 +38,31 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findOne(id: number): Promise<User> {
-    return this.usersRepository.findOne({ where: { id } });
+  async findOne(id: number): Promise<User> {
+    return this.usersRepository.findOne({
+      where: { id },
+      relations: ['referredBy', 'referredBy.referredBy'],
+    });
   }
 
   findByUsername(username: string): Promise<User> {
-    return this.usersRepository.findOne({ where: { username } });
+    return this.usersRepository.findOne({
+      where: { username },
+      relations: ['referredBy'],
+    });
   }
 
   findReferrals(id: number): Promise<User[]> {
     return this.usersRepository.find({ where: { referredBy: { id } } });
+  }
+
+  async updateEarnings(id: number, amount: number): Promise<void> {
+    const user = await this.findOne(id);
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+    user.earnings += amount;
+    await this.usersRepository.save(user);
   }
 
   private generateReferralCode(username: string): string {
