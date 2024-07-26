@@ -3,6 +3,14 @@ This project is a referral system built with NestJS. You can check out the live 
 
 ## Installation
 
+### Cloning the Repository
+
+First, clone the repository to your local machine:
+
+```bash
+git clone https://github.com/your-username/referral-system.git
+```
+
 To install the required dependencies, run:
 
 ```bash

@@ -5,7 +5,6 @@ import { CreatePurchaseDto } from './dto/create-purchases.dto';
 import { Purchase } from './purchases.entity';
 import { NotFoundException } from '@nestjs/common';
 
-
 describe('PurchasesController', () => {
   let purchasesController: PurchasesController;
   let purchasesService: PurchasesService;
